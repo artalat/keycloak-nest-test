@@ -2,19 +2,23 @@ import { ContextType, ExecutionContext } from '@nestjs/common';
 
 type GqlContextType = 'graphql' | ContextType;
 
+export interface ResourceDecoratorOptions {
+  key: string;
+  source?: 'params' | 'body' | 'headers';
+  fallback?: string;
+}
+
 export const extractResourceName =
-  (options: any) =>
+  (options: ResourceDecoratorOptions) =>
   (context: ExecutionContext): string => {
-    const { key, fallback = '' } = options;
+    const { key, source = 'params', fallback = '' } = options;
 
     let resource = fallback;
 
     // Check if request is coming from graphql or http
     if (context.getType() === 'http') {
-      const body = context.switchToHttp().getRequest().body;
-      if (body && body[key]) {
-        resource = body[key];
-      }
+      const request = context.switchToHttp().getRequest();
+      resource = request?.[source]?.[key];
     } else if (context.getType<GqlContextType>() === 'graphql') {
       // let gql: any;
       // // Check if graphql is installed
