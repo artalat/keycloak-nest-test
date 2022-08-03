@@ -1,0 +1,23 @@
+import { Injectable } from '@nestjs/common';
+import { KeycloakConnectOptionsFactory } from 'nest-keycloak-connect';
+import { KeycloakConnectOptions } from 'nest-keycloak-connect/interface/keycloak-connect-options.interface';
+
+@Injectable()
+export class KeyCloakConfigService implements KeycloakConnectOptionsFactory {
+  constructor() {
+    //
+  }
+
+  createKeycloakConnectOptions():
+    | KeycloakConnectOptions
+    | Promise<KeycloakConnectOptions> {
+    //
+
+    return {
+      realm: 'photoz',
+      'auth-server-url': 'http://localhost:28080/auth',
+      clientId: 'rest-api',
+      secret: 'JARCOmEw0yOasPSRAhTjLZV02P4WpyG4',
+    };
+  }
+}
