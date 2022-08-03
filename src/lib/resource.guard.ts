@@ -20,7 +20,7 @@ import { META_SCOPES } from 'nest-keycloak-connect';
 import { KeycloakConnectConfig } from 'nest-keycloak-connect';
 import { extractRequest, useKeycloak } from 'nest-keycloak-connect/util';
 import { KeycloakMultiTenantService } from 'nest-keycloak-connect/services/keycloak-multitenant.service';
-import { KeycloakProtectionService } from '../keycloak-protection.service';
+import { KeycloakProtectionService } from './keycloak-protection.service';
 
 /**
  * This adds a resource guard, which is policy enforcement by default is permissive.

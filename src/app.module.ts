@@ -8,7 +8,7 @@ import {
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { KeyCloakConfigService } from './keycloak-config.service';
-import { KeycloakProtectionService } from './keycloak-protection.service';
+import { KeycloakProtectionService } from './lib/keycloak-protection.service';
 import { ResourceGuard } from './lib/resource.guard';
 
 @Module({

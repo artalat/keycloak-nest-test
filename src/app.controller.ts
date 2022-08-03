@@ -7,7 +7,7 @@ import {
 } from 'nest-keycloak-connect';
 import { AppService } from './app.service';
 import { extractResourceName } from './extractResourceName';
-import { KeycloakProtectionService } from './keycloak-protection.service';
+import { KeycloakProtectionService } from './lib/keycloak-protection.service';
 import { Resource } from './lib/resource.decorator';
 
 @Controller()
