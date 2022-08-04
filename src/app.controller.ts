@@ -6,7 +6,6 @@ import {
   Scopes,
 } from 'nest-keycloak-connect';
 import { AppService } from './app.service';
-import { extractResourceName } from './lib/extractResourceName';
 import { KeycloakProtectionService } from './lib/keycloak-protection.service';
 import { Resource } from './lib/resource.decorator';
 
@@ -42,7 +41,7 @@ export class AppController {
   }
 
   @Get('/album/:id')
-  @Resource(extractResourceName({ key: 'id', fallback: 'album' }))
+  @Resource({ key: 'id' })
   @Scopes('album:view')
   viewAlbum(@Body() body: any, @AuthenticatedUser() user: any): string {
     return `${this.appService.getHello()} from album ${body.id}`;
