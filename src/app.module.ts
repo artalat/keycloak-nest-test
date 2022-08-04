@@ -11,9 +11,18 @@ import { KeyCloakConfigService } from './keycloak-config.service';
 import { KeycloakProtectionService } from './lib/keycloak-protection.service';
 import { ResourceGuard } from './lib/resource.guard';
 
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { AlbumsModule } from './graphql/album.module';
+
 @Module({
   imports: [
-    KeycloakConnectModule.register('./keycloak.json'),
+    AlbumsModule,
+
+    KeycloakConnectModule.registerAsync({
+      useClass: KeyCloakConfigService,
+    }),
+    // KeycloakConnectModule.register('./keycloak.json'),
     // {
     //   authServerUrl: 'http://localhost:8080/auth',
     //   realm: 'Demo-Realm',
@@ -22,6 +31,12 @@ import { ResourceGuard } from './lib/resource.guard';
     //   // Secret key of the client taken from keycloak server
     // }
     HttpModule,
+
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: 'schema.gql',
+      installSubscriptionHandlers: true,
+    }),
   ],
   controllers: [AppController],
   providers: [

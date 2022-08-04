@@ -18,6 +18,9 @@ export class KeyCloakConfigService implements KeycloakConnectOptionsFactory {
       'auth-server-url': 'http://localhost:28080/auth',
       clientId: 'rest-api',
       secret: 'JARCOmEw0yOasPSRAhTjLZV02P4WpyG4',
+
+      // clientId: 'web-app',
+      // secret: 'mY6T60hxgCWotNC9iI8fJ78F1wm2UYBT',
     };
   }
 }
